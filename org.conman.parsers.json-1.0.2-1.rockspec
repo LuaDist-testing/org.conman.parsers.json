@@ -1,17 +1,17 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = "org.conman.parsers.json"
-version = "1.0.1-0"
+version = "1.0.2-1"
 
 -- LuaDist source
 source = {
-  tag = "1.0.1-0",
+  tag = "1.0.2-1",
   url = "git://github.com/LuaDist-testing/org.conman.parsers.json.git"
 }
 -- Original source
 -- source =
 -- {
---   url = "https://raw.github.com/spc476/LPeg-Parsers/json-1.0.1/json.lua"
+--   url = "https://raw.github.com/spc476/LPeg-Parsers/json-1.0.2/json.lua"
 -- }
 
 description =
