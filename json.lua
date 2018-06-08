@@ -74,7 +74,7 @@ end
 -- **********************************************************************
 
 local G = --[[ lpeg/re ]] [[
-json            <- object /  array
+json            <- (object /  array) !.
 
 object          <- begin_object
                         %member_list
@@ -82,7 +82,7 @@ object          <- begin_object
 member          <- {: string name_separator value :}
 
 array           <- begin_array
-                        {| (value (value_separator value)* )* |}
+                        {| (value (value_separator value)* )? |}
                    end_array
                    
 number          <- { "-" ? int frac ? exp ? } => tonumber
@@ -121,7 +121,7 @@ begin_object    <- ws "{" ws
 end_object      <- ws "}" ws
 name_separator  <- ws ":" ws
 value_separator <- ws "," ws
-ws              <- (%c / %s)*
+ws              <- %WS*
 ]]
 
 local member          = lpeg.V"member"
@@ -135,6 +135,8 @@ local member_list     = lpeg.Cf(
 
 local R =
 {
+  WS = lpeg.S"\t\r\n ",
+  
   member_list = member_list,
   
   retnil = function(_,position)
@@ -171,7 +173,7 @@ local R =
       [ [[\]] ] = 92,
       [ [[/]] ] = 47,
       [ [["]] ] = 34,
-      b = 7 ,
+      b = 8 ,
       f = 12 ,
       n = 10,
       r = 13,
